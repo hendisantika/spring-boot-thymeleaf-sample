@@ -8,3 +8,41 @@ spring:
     #active: heroku
     active: localhost
     #active: docker
+---
+spring:
+  jpa:
+    open-in-view: 'false'
+    generate-ddl: 'true'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  datasource:
+    url: jdbc:mysql://localhost:3306/postDB?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Jakarta&useSSL=false
+    username: root
+    password: root
+  profiles:
+    active: docker
+
+---
+spring:
+  jpa:
+    open-in-view: 'false'
+    generate-ddl: 'true'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  datasource:
+    url: jdbc:mysql://us-cdbr-iron-east-03.cleardb.net:3306/postDB?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Jakarta&useSSL=false
+    username: b3cbdaeb0bc884
+    password: 1dcaa063
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: heroku
