@@ -30,4 +30,12 @@ public class ProductService {
         }
         return products;
     }
+
+    public Product findById(Integer id) {
+        return productRepository.findById(id).get();
+    }
+
+    public void delete(Integer id) {
+        productRepository.deleteById(id);
+    }
 }
