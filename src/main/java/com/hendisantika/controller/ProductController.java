@@ -1,5 +1,6 @@
 package com.hendisantika.controller;
 
+import com.hendisantika.dto.ProductAddRequest;
 import com.hendisantika.entity.Product;
 import com.hendisantika.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -62,5 +66,14 @@ public class ProductController {
             modelAndView.setViewName("edit-product");
             return modelAndView;
         }
+    }
+
+    @PostMapping
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> addOrUpdateProduct(@RequestBody @Valid ProductAddRequest request) {
+        productService.addOrUpdateProduct(request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
